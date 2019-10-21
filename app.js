@@ -19,13 +19,7 @@ app.use(
   })
 );
 
-mongoose
-  .connect(
-    `mongodb+srv://${process.env.MONGO_USER}:${
-    process.env.MONGO_PASSWORD
-    }@ngacluster-gwwws.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`,
-    { useUnifiedTopology: true, useNewUrlParser: true },
-  )
+mongoose.connect(`mongodb://mongodb/mydb`, { useCreateIndex: true, useNewUrlParser: true })
   .then(() => {
     app.listen(3000);
   })

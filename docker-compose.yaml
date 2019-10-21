@@ -1,0 +1,27 @@
+version: "2"
+services:
+  nodejs:
+    image: nodejs-graphql:latest
+    container_name: backend-nodejs
+    restart: always
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongodb
+    environment: 
+      - MONGO_HOST=mongodb
+      - MONGO_PORT=27017
+      - MONGO_DATABASE=mydb
+    volumes: 
+      - .:/app
+    entrypoint: ["/bin/sh"]
+    command: >
+      ./entrypoint.sh
+  mongodb:
+    container_name: mongodb
+    image: mongo
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "27017:27017"
